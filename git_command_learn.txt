@@ -1,0 +1,54 @@
+git init
+git status
+git checkout -b new_branch      can use this to create the main branch at beginning. -b should stands for "build". This also switch you to the created branch
+git add file_name. Add your README.md file to the staging area.
+git commit -m "Initial commit". The -m stands for "message". Often times, the first commit of a repo will have the message "Initial commit"
+  Step 1 add to staging, step 2 commit to branch
+  Commit messages often start with fix: or feat:
+git log       Check history
+git diff      You can see the changes you made with git diff
+git branch    Check current branch
+git branch branch_name    You can create a branch with git branch branch_name . branch name always start with feat/ or fix/
+git checkout branch_name    Switch to your new branch
+git log --oneline     Summarize each commit in oneline
+git merge branch_name    You can use git merge branch_name to bring changes from a branch into the branch you are currently on
+git branch -d branch_name     You can delete a branch with git branch -d branch_name. -d stands for "delete".
+    The process is to create a branch, make the changes you want, commit them, and then merge the changes into branch you started on.
+git add .      to add all files on staging
+git rebase main       to rebase this branch.
+    After fix this conflict (remove the <<< , >>> and === line and make the code valid again), use git add again and it will show rebase complete/conflict fixed
+git rebase --continue    do it after fix conflict, git add .
+git stash     You can put your changes aside with git stash. Stash your changes so you can add them to a different branch.
+git stash list    View the thing you have stashed
+git stash pop    You can see one item there. Bring the changes back with git stash pop
+git stash show    View a condensed version in stash
+git stash show -p    -p stands for "patch". You can see how many line add and removed
+git stash apply    You can add the latest stash while keeping it in git stash list
+    stash@{#}) with many of the stash commands to select one other than the latest one. The most recent stash is the one at the top, stash@{0}
+git stash drop / git stash drop <stash_name>    drop the stash
+git reset
+git reset HEAD~1     to go back one before HEAD. It removed the most recent commit, and put all the changes in the working tree.
+                      If you used the --hard flag with the reset, the changes would have not been added to the working tree and if you used the --soft flag,
+                      the changes would have been added to the working tree and to staging.
+git revert HEAD      You can revert the most recent commit (HEAD) with git revert HEAD
+git show HEAD~1      show the changes in the commit HEAD~1
+git rebase --interactive HEAD~2       into the terminal to enter this mode. The HEAD~2 means you will have a chance to change the last two commits.
+                      This will enter nano. You could update the action on the commit here. Follow the menu inside
+git rebase --interactive --root        means that the rebase will go back to your very first commit.
+                      . Look at the commit hash for your Initial commit from the last two times you viewed the log, it's that string left of the log.
+                      They aren't the same anymore since you rebased back to the root. Same goes for the rest of the commits. 
+                      When you rebase interactively it changes all those hashes, so git sees them as different commits. 
+                      If you were to try and merge this into main, it wouldn't work because they don't share the same history anymore. 
+                      For this reason, you don't want to do an interactive rebase where you go back passed commits unique to the branch you are on. 
+                      Fortunately, you can fix this. Enter git rebase main to realign the history of the two branches. 
+git rebase main       Can align the history after interactive
+              Squashing commits means that you will take a bunch of commits and turn them into one. Do in interactive
+git log -1      view the log of the last one
+
+git checkout -b feat/add-gitignore
+touch .env      files are used to store environment variables for running code. Often times, there may be sensitive information in it.
+                Add the text SECRET=MY_SECRET to the file.
+touch .gitignore        Add the text .env to your .gitignore file. 
+                        Now the .env file is being ignored by git because you added it to the .gitignore file
+touch sample.env        Add the text SECRET= in it
+                        Now, when someone wants to run your repo, they will know that they need to create a .env file and add a value in it for SECRET
